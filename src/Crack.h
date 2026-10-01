@@ -21,6 +21,7 @@ public:
           //cout<<"Initing crack " + ofToString(inColour) << endl;
 
           sp.initSandPainter(inColour);
+          sp.resetTime();
           crackMesh.clear();
           
       }

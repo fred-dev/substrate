@@ -3,10 +3,12 @@
 #include "ofMain.h"
 #include "Crack.h"
 #include "SandPainter.h"
+#include "ofxSyphon.h"
+#include "ofxConnexion.h"
 
-
-#define maxpal 128
-#define dimension 1080
+#define maxpal 512
+#define dimensionX 1080
+#define dimensionY 1080
 #define maxnum 200
 
 class ofApp : public ofBaseApp{
@@ -38,7 +40,7 @@ class ofApp : public ofBaseApp{
     ofColor goodcolor[maxpal];
 
     // grid of cracks
-    int cgrid[dimension*dimension];
+    int cgrid[dimensionX*dimensionY];
     std::vector<Crack> cracks;
 
     // color parameters
@@ -55,6 +57,10 @@ class ofApp : public ofBaseApp{
     
     bool startDelay, hasStarted;
 
-
-
+    ofEasyCam cam;
+    bool doDollyForwards, doDollyBack;
+    ofxSyphonServer mainOutputSyphonServer;
+    
+    void connexionMoved(ConnexionData& data);
+    bool stopAddingPoints;
 };

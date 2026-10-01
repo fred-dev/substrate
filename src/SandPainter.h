@@ -9,7 +9,8 @@ public:
     float g;
     ofColor inColour;
     ofMesh sandMesh;
-    
+    int resetTimeVal;
+
     void initSandPainter(ofColor someColor) {
         
         inColour = someColor;
@@ -19,7 +20,9 @@ public:
        // cout<<"Initing sand painter " + ofToString(inColour) << endl;
 
     }
-    
+    void resetTime(){
+        resetTimeVal = ofGetElapsedTimeMillis();
+    }
     
     void render(float x, float y, float ox, float oy) {
       //  cout<<"Rendering crack " + ofToString(inColour) << endl;
@@ -40,8 +43,9 @@ public:
              float a = 0.1-i/(grains*10.0);
                //cout << ofToString(inColour) << endl;
 
-               
-               sandMesh.addVertex(glm::vec3(ox+(x-ox)*sin(sin(i*w)),oy+(y-oy)*sin(sin(i*w)),0));
+               float jumpBack = (ofGetElapsedTimeMillis()) /-10.0;
+               jumpBack = 0;
+               sandMesh.addVertex(glm::vec3(ox+(x-ox)*sin(sin(i*w)),oy+(y-oy)*sin(sin(i*w)),jumpBack));
                sandMesh.addColor(ofColor(inColour.r, inColour.g, inColour.b, 256*a));
                //cout << "added vertex " + ofToString(glm::vec3(ox+(x-ox)*sin(sin(i*w)),oy+(y-oy)*sin(sin(i*w)),0)) + " " + ofToString(ofColor(inColour.r, inColour.g, inColour.b, 256*a)) << endl;
                
